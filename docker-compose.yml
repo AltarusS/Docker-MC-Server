@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  minecraft:
+    image: itzg/minecraft-server
+#Oc the following directories needs to be created beforehand
+    volumes:
+      - minecraftdata:/data
+      - /home/Minecraft/plugins:/plugins
+#Default Minecraft port
+    ports:
+      - 25565:25565
+    environment:
+      EULA: "TRUE"
+      SERVER_NAME: "A Minecraft server"
+      MOTD: "The message that appears underneath the server title!"
+      DIFFICULTY: "normal"
+#Here using Bukkit but could also use Spiegot 
+      TYPE: "BUKKIT"
+#Specify the admin here
+      OPS: "playername"
+      ENABLE_WHITELIST: "TRUE"
+      ENFORCE_WHITELIST: "TRUE"
+      EXEC_DIRECTLY: "TRUE"
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+volumes:
+  minecraftdata:
+    external: true
